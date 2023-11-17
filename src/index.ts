@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+export { Counter } from "./counter";
 
 interface Env {
   Bindings: {
@@ -14,9 +15,9 @@ app.get("*", async (c) => {
 
   const resp = await obj.fetch(c.req.url);
 
-  //   if (resp.status === 404) {
-  //     return c.text("404 Not found", 404);
-  //   }
+  if (resp.status === 404) {
+    return c.text("404 Not found", 404);
+  }
   const response = await resp.text();
   const count = parseInt(response);
 
